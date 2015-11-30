@@ -27,7 +27,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
@@ -35,6 +34,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 /**
@@ -105,7 +105,12 @@ public class Main extends Application {
 			System.out.println("CTA Export started.");
 			try {
 				FileChooser fileChooser = new FileChooser();
+				
 				fileChooser.setTitle("Select save location");
+				ExtensionFilter ctaExtension = new ExtensionFilter(".cta");
+				fileChooser.getExtensionFilters().add(ctaExtension);
+				fileChooser.setSelectedExtensionFilter(ctaExtension);
+				
 				File saveLocation = fileChooser.showSaveDialog(primaryStage);
 				
 				if(saveLocation != null) {
@@ -149,7 +154,14 @@ public class Main extends Application {
 		
 		openSecWindow(primaryStage); 
 
-		primaryStage.setOnCloseRequest(arg0 -> System.exit(1));
+		primaryStage.setOnCloseRequest(arg0 -> {
+			System.out.println("App close requested...");
+			System.out.println("Quitting driver...");
+			driver.quit();
+			System.out.println("Driver quit.");
+			System.out.println("Bye!");
+			System.exit(1);
+		});
 		primaryStage.setScene(new Scene(grid, 800, 600));
 		primaryStage.setTitle("Appium Inspector++ v2.0");
 		primaryStage.show();
