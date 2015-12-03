@@ -107,7 +107,7 @@ public class Main extends Application {
 				FileChooser fileChooser = new FileChooser();
 				
 				fileChooser.setTitle("Select save location");
-				ExtensionFilter ctaExtension = new ExtensionFilter(".cta");
+				ExtensionFilter ctaExtension = new ExtensionFilter("CTA Files (*.cta)", "*.cta");
 				fileChooser.getExtensionFilters().add(ctaExtension);
 				fileChooser.setSelectedExtensionFilter(ctaExtension);
 				

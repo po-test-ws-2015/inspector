@@ -48,7 +48,7 @@ public class WebDriverUtility {
 	 * @return Image
 	 */
 	public static Image takeScreenshot(AppiumDriver webDriver) {
-		//		waitForPageLoad(webDriver);
+		waitForPageLoad(webDriver);
 		return takeScreenshotInst(webDriver);
 	}
 
