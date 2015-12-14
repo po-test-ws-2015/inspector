@@ -114,7 +114,7 @@ public class Main extends Application {
 				File saveLocation = fileChooser.showSaveDialog(primaryStage);
 				
 				if(saveLocation != null) {
-					Document document = ClassificationTreeGenerator.generate(cl.getStringList());
+					Document document = ClassificationTreeGenerator.generate(cl);
 					
 					System.out.println("XML Document created.");
 					

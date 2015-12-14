@@ -23,12 +23,14 @@ public class WebElementInformationList {
 	private List<Dimension> lDimensions;
 	private List<Point> lPoints;
 	private List<String> lStrings;
+	private List<String> lTypes;
 	private int size;
 
 	public WebElementInformationList(List<WebElement> listW) {
 		this.lStrings = new ArrayList<String>();
 		this.lPoints = new ArrayList<Point>();
 		this.lDimensions = new ArrayList<Dimension>();
+		this.lTypes = new ArrayList<String>();
 		this.size = 0;
 		listW.forEach(this::insert);
 	}
@@ -46,7 +48,9 @@ public class WebElementInformationList {
 			if(checkElement(tagName, resourceId))
 			{
 				this.size++;
+				System.out.println("Inserting Element " + resourceId + " of type " + tagName);
 				this.lStrings.add(format(resourceId));
+				this.lTypes.add(formatTag(tagName));
 
 				lDimensions.add(we.getSize());
 				lPoints.add(we.getLocation());
@@ -56,9 +60,13 @@ public class WebElementInformationList {
 		}
 	}
 
+	private String formatTag(String tagName) {
+		return String.format("%s", tagName.replace("android.widget.", ""));
+	}
+
 	private boolean checkElement(String tagName, String resourceId) {
 
-		System.out.println("resourceId: " + resourceId);
+//		System.out.println("resourceId: " + resourceId);
 
 		if(resourceId.length() == 0) {
 			return false;
@@ -68,7 +76,7 @@ public class WebElementInformationList {
 			return false;
 		}
 
-		System.out.println("Tag: " + tagName);
+//		System.out.println("Tag: " + tagName);
 
 		for(String blacklist : tagNameBlacklist) {
 			if(tagName.contains(blacklist)) {
@@ -102,6 +110,10 @@ public class WebElementInformationList {
 
 	public List<String> getStringList() {
 		return this.lStrings;
+	}
+	
+	public List<String> getTypes() {
+		return this.lTypes;
 	}
 
 	/**
