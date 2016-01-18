@@ -60,24 +60,46 @@ public class WebElementInformationList {
 		}
 	}
 
+	/**
+	 * Removes android's tag prefix 
+	 * 
+	 * @param tagName
+	 * @return
+	 */
 	private String formatTag(String tagName) {
 		return String.format("%s", tagName.replace("android.widget.", ""));
 	}
 
+	/**
+	 * Checks if element is interesting based on tagName and resourceId
+	 * @param tagName
+	 * @param resourceId
+	 * @return
+	 */
 	private boolean checkElement(String tagName, String resourceId) {
 
 //		System.out.println("resourceId: " + resourceId);
 
+		/**
+		 * Elements without resource id are useless
+		 */
 		if(resourceId.length() == 0) {
 			return false;
 		}
 
+		/**
+		 * We don't want Android's elements
+		 */
 		if(resourceId.startsWith("android:id")) {
 			return false;
 		}
 
 //		System.out.println("Tag: " + tagName);
 
+		/**
+		 * Blacklist elements by their tag name
+		 * So we can extract WebViews etc. which have a resourceId
+		 */
 		for(String blacklist : tagNameBlacklist) {
 			if(tagName.contains(blacklist)) {
 				return false;

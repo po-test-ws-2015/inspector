@@ -101,6 +101,10 @@ public class Main extends Application {
 		// Top right
 		Button exportButton = new Button("Export View as CTA");
 		
+		/**
+		 * Event if export button is clicked.
+		 * Opens a file chooser and saves the file as .cty
+		 */
 		exportButton.setOnMouseClicked(e -> {
 			System.out.println("CTA Export started.");
 			try {

@@ -1,7 +1,6 @@
 package meilenstein3;
 
 import java.util.Iterator;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -11,6 +10,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class ClassificationTreeGenerator {
+	
+	/**
+	 * Generates a Classification Tree for a given list of web elements.
+	 * 
+	 * @param elements
+	 * @return
+	 * @throws ParserConfigurationException
+	 */
 	public static Document generate(WebElementInformationList elements) throws ParserConfigurationException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
@@ -43,6 +50,9 @@ public class ClassificationTreeGenerator {
 			
 			System.out.println("Type: " + type);
 			
+			/**
+			 * Changes the classes, if element has specific type (e.g. Button can't be valid, but has states pushed or not)
+			 */
 			switch (type) {
 				case "EditText":
 					classValid.setAttribute("name", "Text Valid");
